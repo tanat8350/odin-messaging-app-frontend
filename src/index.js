@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './routes/Root';
 import Login from './routes/Login';
 import Signup from './routes/Signup';
+import Chat from './routes/Chat';
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: 'signup',
         element: <Signup />,
+      },
+      {
+        path: 'user/:receiverid',
+        element: <Chat />,
       },
     ],
   },

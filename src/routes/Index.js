@@ -1,17 +1,22 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 
 function App() {
+  const [user] = useOutletContext();
   const [users, setUsers] = useState([]);
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_SERVER_URL}/user`)
+    if (!user) {
+      return;
+    }
+
+    fetch(`${process.env.REACT_APP_SERVER_URL}/user/${user.id}`)
       .then((res) => res.json())
       .then((json) => setUsers(json));
   }, []);
   return (
     <>
-      <h1>Users</h1>
+      {user ? <h1>Users</h1> : <p>Please login</p>}
       {users &&
         users.map((user) => (
           <div key={user.id}>

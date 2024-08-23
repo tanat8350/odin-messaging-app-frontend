@@ -79,7 +79,7 @@ const Chat = () => {
             msg.image ? (
               <>
                 <p key={msg.id}>
-                  {msg.sender.username} [
+                  {msg.sender.displayName} [
                   {new Date(msg.timestamp).toLocaleString()}
                   ]:
                 </p>
@@ -92,7 +92,7 @@ const Chat = () => {
               </>
             ) : (
               <p key={msg.id}>
-                {msg.sender.username} [
+                {msg.sender.displayName} [
                 {new Date(msg.timestamp).toLocaleString()}
                 ]: {msg.message}
               </p>

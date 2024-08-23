@@ -20,7 +20,9 @@ function App() {
       {users &&
         users.map((user) => (
           <div key={user.id}>
-            <Link to={`/user/${user.id}`}>{user.username}</Link>
+            <Link to={`/user/${user.id}`}>
+              {user.displayName} ({user.username})
+            </Link>
           </div>
         ))}
     </>

@@ -27,6 +27,7 @@ const Login = () => {
       JSON.stringify({
         id: json.user.id,
         username: json.user.username,
+        displayName: json.user.displayName,
         token: json.token,
       })
     );

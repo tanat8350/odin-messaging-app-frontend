@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Index from './routes/Index';
+import Home from './routes/Home';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './routes/Root';
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Index />,
+        element: <Home />,
       },
       {
         path: 'login',

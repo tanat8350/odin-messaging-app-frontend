@@ -27,7 +27,9 @@ const Root = () => {
           {user ? (
             <>
               <li>
-                <Link to="/profile">{user.username}</Link>
+                <Link to="/profile">
+                  {user.displayName} ({user.username})
+                </Link>
               </li>
               <li>
                 <Link onClick={logout}>Logout</Link>

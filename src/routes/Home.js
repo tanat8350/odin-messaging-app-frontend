@@ -6,19 +6,21 @@ function App() {
   const [user] = useOutletContext();
   const [users, setUsers] = useState([]);
   console.log(user);
+
   useEffect(() => {
     if (!user) {
       return;
     }
 
-    fetch(`${process.env.REACT_APP_SERVER_URL}/user/${user.id}`)
+    fetch(`${process.env.REACT_APP_SERVER_URL}/user/${user.id}/users`)
       .then((res) => res.json())
       .then((json) => setUsers(json));
   }, [user]);
   return (
     <>
       {user ? <h1>Users</h1> : <p>Please login</p>}
-      {users &&
+      {user &&
+        users.length > 0 &&
         users.map((user) => (
           <div key={user.id}>
             <Link to={`/chat/${user.id}`}>

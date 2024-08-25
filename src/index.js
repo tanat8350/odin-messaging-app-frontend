@@ -28,7 +28,7 @@ const router = createBrowserRouter([
         element: <Signup />,
       },
       {
-        path: 'chat/:receiverid',
+        path: 'chat/:recipientid',
         element: <Chat />,
       },
       {

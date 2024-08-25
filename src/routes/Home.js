@@ -5,14 +5,13 @@ import { Link, useOutletContext } from 'react-router-dom';
 function App() {
   const [user] = useOutletContext();
   const [users, setUsers] = useState([]);
-  console.log(user);
 
   useEffect(() => {
     if (!user) {
       return;
     }
 
-    fetch(`${process.env.REACT_APP_SERVER_URL}/user/${user.id}/users`)
+    fetch(`${process.env.REACT_APP_SERVER_URL}/user/${user.id}/others`)
       .then((res) => res.json())
       .then((json) => setUsers(json));
   }, [user]);

@@ -3,12 +3,12 @@ import { useOutletContext, useParams } from 'react-router-dom';
 
 const Chat = () => {
   const [user, setUser] = useOutletContext();
-  const { receiverid } = useParams();
+  const { recipientid } = useParams();
   const [data, setData] = useState([]);
 
   const fetchMessages = async () => {
     const res = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/user/${user.id}/${receiverid}`
+      `${process.env.REACT_APP_SERVER_URL}/user/${user.id}/${recipientid}`
     );
     const json = await res.json();
     setData(json);
@@ -19,7 +19,7 @@ const Chat = () => {
     const formData = new FormData();
     formData.append('image', e.target.image.files[0]);
     const res = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/user/${user.id}/${receiverid}`,
+      `${process.env.REACT_APP_SERVER_URL}/user/${user.id}/${recipientid}`,
       {
         method: 'POST',
         mode: 'cors',
@@ -42,7 +42,7 @@ const Chat = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const res = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/user/${user.id}/${receiverid}`,
+      `${process.env.REACT_APP_SERVER_URL}/user/${user.id}/${recipientid}`,
       {
         method: 'POST',
         mode: 'cors',

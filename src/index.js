@@ -8,6 +8,7 @@ import Root from './routes/Root';
 import Login from './routes/Login';
 import Signup from './routes/Signup';
 import Chat from './routes/Chat';
+import Profile from './routes/Profile';
 
 const router = createBrowserRouter([
   {
@@ -27,8 +28,12 @@ const router = createBrowserRouter([
         element: <Signup />,
       },
       {
-        path: 'user/:receiverid',
+        path: 'chat/:receiverid',
         element: <Chat />,
+      },
+      {
+        path: 'profile',
+        element: <Profile />,
       },
     ],
   },

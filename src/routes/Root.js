@@ -12,9 +12,9 @@ const Root = () => {
   };
 
   useEffect(() => {
-    if (localStorage.getItem('accessToken')) {
-      const localUser = JSON.parse(localStorage.getItem('localUser'));
-      setUser(localUser);
+    if (localStorage.getItem('user')) {
+      const user = JSON.parse(localStorage.getItem('user'));
+      setUser(user);
     }
   }, []);
   return (

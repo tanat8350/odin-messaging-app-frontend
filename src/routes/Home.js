@@ -40,7 +40,7 @@ function App() {
     <>
       <h1>Group chats</h1>
       <button onClick={onClickCreateNewGroupChat}>Create new group chat</button>
-      {userData && userData.groupChats.length > 0 && (
+      {userData && userData.groupChats.length > 0 ? (
         <div>
           {userData.groupChats.map((group) => (
             <div key={group.id}>
@@ -48,6 +48,23 @@ function App() {
             </div>
           ))}
         </div>
+      ) : (
+        <p>No group chats</p>
+      )}
+      <h1>Friends</h1>
+      {userData &&
+      (userData.friends.length > 0 || userData.friendOf.length > 0) ? (
+        <div>
+          {[...userData.friends, ...userData.friendOf].map((friend) => (
+            <div key={friend.id}>
+              <Link to={`/chat/${friend.id}`}>
+                {friend.displayName} ({friend.username})
+              </Link>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p>No friends</p>
       )}
       <h1>All Users</h1>
       {user &&

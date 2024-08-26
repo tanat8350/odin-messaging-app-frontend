@@ -8,6 +8,7 @@ import Root from './routes/Root';
 import Login from './routes/Login';
 import Signup from './routes/Signup';
 import Chat from './routes/Chat';
+import GroupChat from './routes/GroupChat';
 import Profile from './routes/Profile';
 
 const router = createBrowserRouter([
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: 'chat/:recipientid',
         element: <Chat />,
+      },
+      {
+        path: 'chat/group/:groupid',
+        element: <GroupChat />,
       },
       {
         path: 'profile',

@@ -24,7 +24,7 @@ function App() {
     });
   }, [user]);
 
-  const onClickCreateNewGroupChat = async () => {
+  const onClickCreateNewGroupChat = () => {
     api.post('/chat/group', { id: user.id }).then((res) => {
       if (!res.data.success) {
         console.error('fail to create group chat');

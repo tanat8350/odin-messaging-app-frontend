@@ -6,6 +6,7 @@ import {
   useParams,
 } from 'react-router-dom';
 import api from '../configs/api';
+import updateLastRequest from '../utils/updateLastRequest';
 
 const GroupChat = () => {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ const GroupChat = () => {
   const [data, setData] = useState(null);
 
   const fetchMessages = async () => {
+    updateLastRequest(user);
     const res = await api.get(`/chat/group/${groupid}`);
     const data = await res.data;
     console.log(data);
@@ -21,6 +23,7 @@ const GroupChat = () => {
   };
 
   const onClickLeaveGroup = async () => {
+    updateLastRequest(user);
     const body = {
       userid: user.id,
     };
@@ -35,6 +38,7 @@ const GroupChat = () => {
   };
 
   const onClickDeleteGroup = async () => {
+    updateLastRequest(user);
     const res = await api.delete(`/chat/group/${groupid}`);
     const data = await res.data;
     if (!data.success) {

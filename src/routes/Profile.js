@@ -1,4 +1,5 @@
 import { useNavigate, useOutletContext } from 'react-router-dom';
+import updateLastRequest from '../utils/updateLastRequest';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -6,6 +7,7 @@ const Profile = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    updateLastRequest(user);
     // not working
     // const formData = new FormData();
     // formData.append('displayName', e.target.displayName.value);

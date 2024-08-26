@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useOutletContext, useParams } from 'react-router-dom';
+import updateLastRequest from '../utils/updateLastRequest';
 
 const Chat = () => {
   const [user, setUser] = useOutletContext();
@@ -7,6 +8,7 @@ const Chat = () => {
   const [data, setData] = useState([]);
 
   const fetchMessages = async () => {
+    updateLastRequest(user);
     const res = await fetch(
       `${process.env.REACT_APP_SERVER_URL}/user/${user.id}/${recipientid}`
     );
@@ -41,6 +43,7 @@ const Chat = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    updateLastRequest(user);
     const res = await fetch(
       `${process.env.REACT_APP_SERVER_URL}/user/${user.id}/${recipientid}`,
       {

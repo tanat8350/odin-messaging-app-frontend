@@ -2,6 +2,7 @@ import './App.css';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useOutletContext } from 'react-router-dom';
 import api from '../configs/api';
+import updateLastRequest from '../utils/updateLastRequest';
 
 function App() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ function App() {
     if (!user) {
       return;
     }
+    updateLastRequest(user);
 
     fetch(`${process.env.REACT_APP_SERVER_URL}/user/${user.id}/others`)
       .then((res) => res.json())
@@ -25,6 +27,7 @@ function App() {
   }, [user]);
 
   const onClickCreateNewGroupChat = () => {
+    updateLastRequest(user);
     api.post('/chat/group', { id: user.id }).then((res) => {
       if (!res.data.success) {
         console.error('fail to create group chat');
@@ -60,6 +63,13 @@ function App() {
               <Link to={`/chat/${friend.id}`}>
                 {friend.displayName} ({friend.username})
               </Link>
+              <span>
+                {new Date(
+                  new Date() - new Date(friend.lastRequest)
+                ).getMinutes() < 5
+                  ? ' Online'
+                  : ''}
+              </span>
             </div>
           ))}
         </div>

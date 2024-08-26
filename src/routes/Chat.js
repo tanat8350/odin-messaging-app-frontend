@@ -16,7 +16,7 @@ const Chat = () => {
   const fetchMessages = async () => {
     updateLastRequest(user);
     const res = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/user/${user.id}/${recipientid}`
+      `${process.env.REACT_APP_SERVER_URL}/chat/${user.id}/${recipientid}`
     );
     const json = await res.json();
     setData(json);
@@ -27,7 +27,7 @@ const Chat = () => {
     const formData = new FormData();
     formData.append('image', e.target.image.files[0]);
     const res = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/user/${user.id}/${recipientid}`,
+      `${process.env.REACT_APP_SERVER_URL}/chat/${user.id}/${recipientid}`,
       {
         method: 'POST',
         mode: 'cors',
@@ -51,7 +51,7 @@ const Chat = () => {
     e.preventDefault();
     updateLastRequest(user);
     const res = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/user/${user.id}/${recipientid}`,
+      `${process.env.REACT_APP_SERVER_URL}/chat/${user.id}/${recipientid}`,
       {
         method: 'POST',
         mode: 'cors',

@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useOutletContext, useParams } from 'react-router-dom';
 import updateLastRequest from '../utils/updateLastRequest';
+import api from '../configs/api';
 
 const Chat = () => {
   const [user, setUser] = useOutletContext();
   const { recipientid } = useParams();
+  const [recipient, setRecipient] = useState(null);
   const [data, setData] = useState([]);
+
+  const fetchRecipient = async () => {
+    api.get(`/user/${recipientid}`).then((res) => setRecipient(res.data));
+  };
 
   const fetchMessages = async () => {
     updateLastRequest(user);
@@ -69,13 +75,46 @@ const Chat = () => {
     if (!user) {
       return;
     }
+    fetchRecipient();
     fetchMessages();
   }, []);
 
   if (!user) return <p>You must be logged in</p>;
   return (
     <>
-      <h1>Chat</h1>
+      <h1>
+        Chat {recipient && `${recipient.displayName} (${recipient.username})`}
+      </h1>
+      {recipient &&
+      [...recipient.friends, ...recipient.friendOf].reduce((a, friend) => {
+        if (friend.id === user.id) {
+          return (a = true);
+        }
+      }, false) ? (
+        <button
+          onClick={async () => {
+            await api.delete(`/user/${user.id}/friend`, {
+              data: {
+                friendId: recipientid,
+              },
+            });
+            fetchRecipient();
+          }}
+        >
+          Remove from friends
+        </button>
+      ) : (
+        <button
+          onClick={async () => {
+            await api.post(`/user/${user.id}/friend`, {
+              friendId: recipientid,
+            });
+            fetchRecipient();
+          }}
+        >
+          Add to friends
+        </button>
+      )}
       {data && (
         <div className="mb-10">
           {data.map((msg) =>
@@ -106,10 +145,12 @@ const Chat = () => {
       <div className="fixed bottom-0">
         <form onSubmit={onSubmitImage} encType="multipart/form-data">
           <input id="image" type="file" accept="image/*" />
+          &nbsp;
           <button type="submit">Send image</button>
         </form>
         <form onSubmit={onSubmit}>
           <input id="message" type="text" />
+          &nbsp;
           <button type="submit">Send</button>
         </form>
       </div>

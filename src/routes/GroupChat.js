@@ -153,6 +153,7 @@ const GroupChat = () => {
       <div className="fixed bottom-0">
         <form onSubmit={onSubmitSendMessage}>
           <input id="message" type="text" />
+          &nbsp;
           <button type="submit">Send</button>
         </form>
       </div>

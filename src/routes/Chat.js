@@ -15,32 +15,37 @@ const Chat = () => {
 
   const fetchMessages = async () => {
     updateLastRequest(user);
-    const res = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/chat/${user.id}/${recipientid}`
-    );
-    const json = await res.json();
-    setData(json);
+    const res = await api.get(`/chat/${user.id}/${recipientid}`);
+    const data = await res.data;
+    setData(data);
+    // const res = await fetch(
+    //   `${process.env.REACT_APP_SERVER_URL}/chat/${user.id}/${recipientid}`
+    // );
+    // const json = await res.json();
+    // setData(json);
   };
 
   const onSubmitImage = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('image', e.target.image.files[0]);
-    const res = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/chat/${user.id}/${recipientid}`,
-      {
-        method: 'POST',
-        mode: 'cors',
-        // tried not work
-        // js image files
-        // image files
-        // files
-        // formData + multipart header
-        body: formData,
-      }
-    );
-    const json = await res.json();
-    if (!json.success) {
+    const res = await api.post(`/chat/${user.id}/${recipientid}`, formData);
+    const data = await res.data;
+    // const res = await fetch(
+    //   `${process.env.REACT_APP_SERVER_URL}/chat/${user.id}/${recipientid}`,
+    //   {
+    //     method: 'POST',
+    //     mode: 'cors',
+    //     // tried not work
+    //     // js image files
+    //     // image files
+    //     // files
+    //     // formData + multipart header
+    //     body: formData,
+    //   }
+    // );
+    // const json = await res.json();
+    if (!data.success) {
       return console.log('error');
     }
     e.target.image.value = '';
@@ -50,21 +55,12 @@ const Chat = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     updateLastRequest(user);
-    const res = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/chat/${user.id}/${recipientid}`,
-      {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          message: e.target.message.value,
-        }),
-      }
-    );
-    const json = await res.json();
-    if (!json.success) {
+    const body = {
+      message: e.target.message.value,
+    };
+    const res = await api.post(`/chat/${user.id}/${recipientid}`, body);
+    const data = await res.data;
+    if (!data.success) {
       return console.log('error');
     }
     e.target.message.value = '';

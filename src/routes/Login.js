@@ -28,9 +28,9 @@ const Login = () => {
         id: json.user.id,
         username: json.user.username,
         displayName: json.user.displayName,
-        token: json.token,
       })
     );
+    localStorage.setItem('token', JSON.stringify(json.token));
     navigate('/');
   };
 

@@ -7,6 +7,7 @@ const Root = () => {
   const logout = (e) => {
     e.preventDefault();
     localStorage.removeItem('user');
+    localStorage.removeItem('token');
     setUser(null);
     navigate('/');
   };

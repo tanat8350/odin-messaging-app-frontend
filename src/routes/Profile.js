@@ -1,5 +1,6 @@
 import { useNavigate, useOutletContext } from 'react-router-dom';
 import updateLastRequest from '../utils/updateLastRequest';
+import api from '../configs/api';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -11,29 +12,17 @@ const Profile = () => {
     // not working
     // const formData = new FormData();
     // formData.append('displayName', e.target.displayName.value);
-    const res = await fetch(
-      `${process.env.REACT_APP_SERVER_URL}/user/${user.id}`,
-      {
-        method: 'put',
-        mode: 'cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          displayName: e.target.displayName.value,
-        }),
-      }
-    );
-    const json = await res.json();
-    if (!json) {
+    const res = api.put(`/user/${user.id}`, {
+      displayName: e.target.displayName.value,
+    });
+    const data = await res.data;
+    if (!data) {
       return console.log('error');
     }
-    console.log(json);
     const update = {
       ...user,
-      ...json,
+      ...data,
     };
-    console.log(update);
     setUser(update);
     localStorage.setItem('user', JSON.stringify(update));
     navigate('/');

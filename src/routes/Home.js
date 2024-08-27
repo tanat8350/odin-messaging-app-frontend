@@ -16,9 +16,7 @@ function App() {
     }
     updateLastRequest(user);
 
-    fetch(`${process.env.REACT_APP_SERVER_URL}/user/${user.id}/others`)
-      .then((res) => res.json())
-      .then((json) => setUsers(json));
+    api.get(`/user/${user.id}/others`).then((res) => setUsers(res.data));
 
     api.get(`/user/${user.id}`).then((res) => {
       setUserData(res.data);

@@ -12,11 +12,11 @@ const Profile = () => {
     // not working
     // const formData = new FormData();
     // formData.append('displayName', e.target.displayName.value);
-    const res = api.put(`/user/${user.id}`, {
+    const res = await api.put(`/user/${user.id}`, {
       displayName: e.target.displayName.value,
     });
     const data = await res.data;
-    if (!data) {
+    if (!data.success) {
       return console.log('error');
     }
     const update = {

@@ -29,7 +29,10 @@ const Chat = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('image', e.target.image.files[0]);
-    const res = await api.post(`/chat/${user.id}/${recipientid}`, formData);
+    const res = await api.post(
+      `/chat/${user.id}/${recipientid}/image`,
+      formData
+    );
     const data = await res.data;
     // const res = await fetch(
     //   `${process.env.REACT_APP_SERVER_URL}/chat/${user.id}/${recipientid}`,
@@ -140,7 +143,11 @@ const Chat = () => {
       )}
       <div className="fixed bottom-0">
         <form onSubmit={onSubmitImage} encType="multipart/form-data">
-          <input id="image" type="file" accept="image/*" />
+          <input
+            id="image"
+            type="file"
+            accept="image/jpeg, image/jpg image/png"
+          />
           &nbsp;
           <button type="submit">Send image</button>
         </form>

@@ -20,7 +20,6 @@ function App() {
 
     api.get(`/user/${user.id}`).then((res) => {
       setUserData(res.data);
-      console.log(res.data);
     });
   }, [user]);
 

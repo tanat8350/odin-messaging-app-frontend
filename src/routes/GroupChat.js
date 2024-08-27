@@ -18,7 +18,6 @@ const GroupChat = () => {
     updateLastRequest(user);
     const res = await api.get(`/chat/group/${groupid}`);
     const data = await res.data;
-    console.log(data);
     setData(data);
   };
 
@@ -56,7 +55,6 @@ const GroupChat = () => {
     // FormData and postForm not work
     const res = await api.post(`/chat/group/${groupid}/message`, body);
     const data = await res.data;
-    console.log(data);
     if (!data.success) {
       return console.log('error');
     }

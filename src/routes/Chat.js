@@ -18,11 +18,6 @@ const Chat = () => {
     const res = await api.get(`/chat/${user.id}/${recipientid}`);
     const data = await res.data;
     setData(data);
-    // const res = await fetch(
-    //   `${process.env.REACT_APP_SERVER_URL}/chat/${user.id}/${recipientid}`
-    // );
-    // const json = await res.json();
-    // setData(json);
   };
 
   const onSubmitImage = async (e) => {
@@ -34,20 +29,6 @@ const Chat = () => {
       formData
     );
     const data = await res.data;
-    // const res = await fetch(
-    //   `${process.env.REACT_APP_SERVER_URL}/chat/${user.id}/${recipientid}`,
-    //   {
-    //     method: 'POST',
-    //     mode: 'cors',
-    //     // tried not work
-    //     // js image files
-    //     // image files
-    //     // files
-    //     // formData + multipart header
-    //     body: formData,
-    //   }
-    // );
-    // const json = await res.json();
     if (!data.success) {
       return console.log('error');
     }

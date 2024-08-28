@@ -9,9 +9,6 @@ const Profile = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     updateLastRequest(user);
-    // not working
-    // const formData = new FormData();
-    // formData.append('displayName', e.target.displayName.value);
     const res = await api.put(`/user/${user.id}`, {
       displayName: e.target.displayName.value,
     });
